@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Validation</title>
+  <style>.err { color: red; font-size: 13px; }</style>
+</head>
+<body>
+  <h2>Registration Form</h2>
+  <form onsubmit="validateForm(event)">
+    Name: <input type="text" id="name"><div id="nameErr" class="err"></div><br>
+    Email: <input type="text" id="email"><div id="emailErr" class="err"></div><br>
+    Mobile: <input type="text" id="mobile"><div id="mobErr" class="err"></div><br>
+    <button type="submit">Register</button>
+  </form>
+  <p id="ok" style="color:green"></p>
+
+  <script>
+    function validateForm(e) {
+      e.preventDefault();
+      var ok = true;
+      var n = document.getElementById("name").value.trim();
+      var em = document.getElementById("email").value.trim();
+      var m = document.getElementById("mobile").value.trim();
+
+      document.getElementById("nameErr").textContent = n ? "" : (ok = false, "Name is required.");
+      document.getElementById("emailErr").textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em) ? "" : (ok = false, "Enter a valid email.");
+      document.getElementById("mobErr").textContent = /^\d{10}$/.test(m) ? "" : (ok = false, "Enter a 10-digit mobile number.");
+      document.getElementById("ok").textContent = ok ? "Registration Successful!" : "";
+    }
+  </script>
+</body>
+</html>
